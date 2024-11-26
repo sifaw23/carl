@@ -1,0 +1,274 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
+  --neon-pink: #FF1493;
+  --neon-green: #00FF7F;
+}
+
+/* Base styles */
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Animation keyframes */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes glow {
+  0% { filter: brightness(100%) blur(4px); }
+  50% { filter: brightness(150%) blur(6px); }
+  100% { filter: brightness(100%) blur(4px); }
+}
+
+@keyframes scan {
+  from { background-position: 0 0 }
+  to { background-position: 0 20px }
+}
+
+@keyframes flicker {
+  0% { opacity: 0.9; }
+  5% { opacity: 0.8; }
+  10% { opacity: 0.9; }
+  15% { opacity: 0.85; }
+  20% { opacity: 0.9; }
+  100% { opacity: 1; }
+}
+
+@keyframes tvStatic {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(1px, 1px); }
+  100% { transform: translate(0, 0); }
+}
+
+/* TV and Screen Effects */
+.bg-scan-lines {
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.1) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  background-size: 100% 4px;
+  animation: scan 1s linear infinite;
+}
+
+.screen-flicker {
+  animation: flicker 0.15s infinite;
+}
+
+.tv-static {
+  animation: tvStatic 0.05s infinite;
+}
+
+.screen-glow {
+  box-shadow: 
+    0 0 20px rgba(255, 20, 147, 0.2),
+    0 0 40px rgba(0, 255, 127, 0.1);
+}
+
+/* Utility classes */
+.animate-gradient {
+  background-size: 200% auto;
+  animation: gradient 3s linear infinite;
+}
+
+.drop-shadow-glow {
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+}
+
+.neon-text-pink {
+  color: var(--neon-pink);
+  text-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
+}
+
+.neon-text-green {
+  color: var(--neon-green);
+  text-shadow: 0 0 10px rgba(0, 255, 127, 0.5);
+}
+
+.neon-border {
+  border: 1px solid transparent;
+  background: linear-gradient(90deg, var(--neon-pink), var(--neon-green)) border-box;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+}
+
+.backdrop-blur {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Glass effect */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  .animate-gradient {
+    background-size: 150% auto;
+  }
+
+  .drop-shadow-glow {
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+  }
+
+  .screen-glow {
+    box-shadow: 
+      0 0 10px rgba(255, 20, 147, 0.2),
+      0 0 20px rgba(0, 255, 127, 0.1);
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Hide scrollbar but keep functionality */
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+/* Better tap highlight on mobile */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Gradient text support for all browsers */
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+  .gradient-text {
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+}
+
+/* Animation performance optimizations */
+.will-change-transform {
+  will-change: transform;
+}
+
+.hardware-accelerate {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Custom scrollbar for Firefox */
+* {
+  scrollbar-width: none;
+}
+
+/* Better image rendering */
+img {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* Focus styles for accessibility */
+:focus-visible {
+  outline: 2px solid var(--neon-pink);
+  outline-offset: 2px;
+}
+
+/* Selection color */
+::selection {
+  background-color: var(--neon-pink);
+  color: white;
+}
+
+/* System dark mode preference */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+  }
+}
+
+/* Chart specific styles */
+.chart-container {
+  filter: drop-shadow(0 0 10px rgba(0, 255, 127, 0.2));
+}
+
+.chart-tooltip {
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(4px);
+}
+
+/* TV Screen specific styles */
+.tv-screen {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  background: 
+    linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0.05)
+    );
+}
+
+.tv-screen::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    linear-gradient(
+      90deg,
+      transparent 50%,
+      rgba(255, 255, 255, 0.05) 50%
+    );
+  background-size: 4px 4px;
+  pointer-events: none;
+}
+
+.tv-screen::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    rgba(255, 20, 147, 0.1) 0%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
